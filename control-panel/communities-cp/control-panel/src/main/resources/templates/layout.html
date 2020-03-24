@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:replace="fragments/head"></head>
+    <body class="skin-blue sidebar-mini">
+        <div class="wrapper">
+            <!-- Main Header -->
+            <header class="main-header" th:replace="fragments/header"></header>
+            <form action="/setGlobalOrg" id="orgSwitcherForm" method="post">
+                <input type="hidden" name="orgId" value="0" id="swichterOrgId">
+            </form>
+            <form action="/setGlobalSubOrg" id="subOrgSwitcherForm">
+                <input type="hidden" name="subOrgId" value="0" id="swichterSubOrgId">
+            </form>
+            <aside class="main-sidebar" th:replace="fragments/sidebar"></aside>
+            <!--loader-->
+            <div class="loader-wrapper" style="display:none" id="loader">
+                <div class="loader-inner">
+                    <img src="/assets/images/loader-ril.svg">
+                    <span id="loader-text"> Please wait... </span>
+                </div>
+            </div>
+            <!------------loader ends-------->
+            <!-- Main content Start Here -->
+            <div class="content-wrapper" layout:fragment="content"></div>
+            <!-- Main content End Here -->
+            <footer class="main-footer" th:replace="fragments/footer"></footer>
+            <div class="control-sidebar-bg"></div>
+        </div>
+        <div layout:fragment="modal-popup"></div>
+        <div th:replace="fragments/scripts"></div>
+        <div layout:fragment="inner-scripts"></div>
+        <script th:inline="javascript">
+            $(document).ready(function () {
+                $(".switch-client").on("click", function () {
+                    console.log($(this).data('org'));
+                    $("#swichterOrgId").val($(this).data('org'));
+                    $("#orgSwitcherForm").submit();
+                });
+
+                var flashStatus = [[${status}]];
+                var flashMessage = [[${message}]];
+                switch (flashStatus) {
+                    case "success":
+                        swal({
+                            title: "Success",
+                            text: flashMessage,
+                            type: "success",
+                            confirmButtonColor: "#34659f",
+                            cancelButtonColor: "#dad6d6"
+                        });
+                        break;
+                    case "error":
+                        swal("Error", flashMessage, "error");
+                        break;
+                    case "info" :
+                        swal("Info", flashMessage, "info");
+                        break;
+                    case "warning" :
+                        swal("Warning", flashMessage, "warning");
+                        break;
+                    default :
+                        console.log(flashMessage);
+                        console.log(flashStatus);
+                        break;
+                }
+                if($('#popoverData').length > 0){
+                    $('#popoverData').popover();
+                    $('#popoverOption').popover({ trigger: "hover" });
+                }
+            });
+
+        </script>
+    </body>
+</html>

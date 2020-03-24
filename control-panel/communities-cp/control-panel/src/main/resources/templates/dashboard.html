@@ -1,0 +1,327 @@
+<div layout:decorate="~{layout}">
+    <!-- Main content Start Here -->
+    <div layout:fragment="content">
+        <section class="content-header">
+            <h1>Dashboard</h1>
+            <div class="language-select"></div>
+        </section>
+        <section class="content container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="dashboard-card-box">
+                                        <div class="col-sm-2" th:if="!${session.role == 'SUBORG ADMIN'}">
+                                       <span class="dashboard-data light-gray">
+                                          <ul class="da-thumbs">
+                                             <li>
+                                                <a th:href="${session.role == 'SAAS ADMIN' ? '/org':'/organization'}">
+                                                   <div class="front-data">
+                                                      <span class="icon">
+                                                          <img src="/assets/images/dashboard-icon/client.png" alt=""
+                                                               title=""/>
+                                                      </span>
+                                                      <span class="title" th:if="${session.role == 'SAAS ADMIN'}">Organization Management</span>
+                                                      <span class="title" th:if="${session.role == 'ORG ADMIN'}">Sub-Org Management</span>
+                                                   </div>
+                                                   <article class="da-animate da-slideFromRight">
+                                                      <div class="back-data">
+                                                         <span class="icon">
+                                                             <img src="/assets/images/dashboard-icon/client-h.png"
+                                                                  alt="" title=""/>
+                                                         </span>
+                                                         <span class="title" th:if="${session.role == 'SAAS ADMIN'}">Organization Management</span>
+                                                         <span class="title" th:if="${session.role == 'ORG ADMIN'}">Sub-Organization Management</span>
+                                                      </div>
+                                                   </article>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </span>
+                                        </div>
+                                        <div class="col-sm-2" th:if="!${session.role == 'SUBORG ADMIN'}">
+                                       <span class="dashboard-data light-gray">
+                                          <ul class="da-thumbs">
+                                             <li>
+                                                <a href="/users">
+                                                   <div class="front-data">
+                                                      <span class="icon">
+                                                          <img src="/assets/images/dashboard-icon/user.png" alt=""
+                                                               title=""/> </span>
+                                                      <span class="title" th:if="!${session.role == 'SUBORG ADMIN'}">user Management</span>
+                                                   </div>
+                                                   <article class="da-animate da-slideFromRight">
+                                                      <div class="back-data">
+                                                         <span class="icon">
+                                                             <img src="/assets/images/dashboard-icon/user-h.png" alt=""
+                                                                  title=""/>
+                                                         </span>
+                                                         <span class="title" th:if="!${session.role == 'SUBORG ADMIN'}">user Management</span>
+                                                      </div>
+                                                   </article>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </span>
+                                        </div>
+                                        <div class="col-sm-2" th:if="!${session.role == 'SUBORG ADMIN'}">
+                                       <span class="dashboard-data light-gray">
+                                          <ul class="da-thumbs">
+                                             <li>
+                                                <a href="/org/approval">
+                                                   <div class="front-data">
+                                                      <span class="icon">
+                                                          <img src="/assets/images/dashboard-icon/approval.png" alt=""
+                                                               title=""/>
+                                                      </span>
+                                                      <span class="title" th:if="!${session.role == 'SUBORG ADMIN'}">Approvals</span>
+                                                   </div>
+                                                   <article class="da-animate da-slideFromRight">
+                                                      <div class="back-data">
+                                                         <span class="icon">
+                                                             <img src="/assets/images/dashboard-icon/approval-h.png"
+                                                                  alt="" title=""/>
+                                                         </span>
+                                                         <span class="title">Approvals</span>
+                                                      </div>
+                                                   </article>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </span>
+                                        </div>
+                                        <div class="col-sm-2">
+                                       <span class="dashboard-data light-gray">
+                                          <ul class="da-thumbs">
+                                             <li>
+                                                <a href="/product-hierarchy">
+                                                   <div class="front-data">
+                                                      <span class="icon">
+                                                          <img src="/assets/images/dashboard-icon/product-hierarchy.png"
+                                                               alt="" title=""/>
+                                                      </span>
+                                                      <span class="title">Product Hierarchy</span>
+                                                   </div>
+                                                   <article class="da-animate da-slideFromRight">
+                                                      <div class="back-data">
+                                                         <span class="icon">
+                                                             <img src="/assets/images/dashboard-icon/product-hierarchy-h.png"
+                                                                  alt="" title=""/>
+                                                         </span>
+                                                         <span class="title">  Product Hierarchy </span>
+                                                      </div>
+                                                   </article>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </span>
+                                        </div>
+                                        <div class="col-sm-2">
+                                       <span class="dashboard-data light-gray">
+                                          <ul class="da-thumbs">
+                                             <li>
+                                                <a href="/content">
+                                                   <div class="front-data">
+                                                      <span class="icon">
+                                                          <img src="/assets/images/dashboard-icon/content-type.png"
+                                                               alt="" title=""/>
+                                                      </span>
+                                                      <span class="title">Content Type</span>
+                                                   </div>
+                                                   <article class="da-animate da-slideFromRight">
+                                                      <div class="back-data">
+                                                         <span class="icon">
+                                                             <img src="/assets/images/dashboard-icon/content-type-h.png"
+                                                                  alt="" title=""/>
+                                                         </span>
+                                                         <span class="title">Content Type</span>
+                                                      </div>
+                                                   </article>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </span>
+                                        </div>
+                                        <div class="col-sm-2" th:if="!${session.role == 'SAAS ADMIN'}">
+                                       <span class="dashboard-data light-gray">
+                                          <ul class="da-thumbs">
+                                             <li>
+                                                <a href="/community">
+                                                   <div class="front-data">
+                                                      <span class="icon">
+                                                          <img src="/assets/images/dashboard-icon/hybrid-communities.png"
+                                                               alt="" title=""/>
+                                                      </span>
+                                                      <span class="title" th:if="${session.role == 'ORG ADMIN'}">Org-Level Communities</span>
+                                                      <span class="title" th:if="${session.role == 'SUBORG ADMIN'}">Communities</span>
+                                                   </div>
+                                                   <article class="da-animate da-slideFromRight">
+                                                      <div class="back-data">
+                                                         <span class="icon">
+                                                             <img src="/assets/images/dashboard-icon/hybrid-communities-h.png"
+                                                                  alt="" title=""/>
+                                                         </span>
+                                                         <span class="title" th:if="${session.role == 'ORG ADMIN'}">Org-Level Communities</span>
+                                                         <span class="title" th:if="${session.role == 'SUBORG ADMIN'}"> Communities</span>
+                                                      </div>
+                                                   </article>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </span>
+                                        </div>
+                                        <div class="col-sm-2" th:if="!${session.role == 'SAAS ADMIN'}">
+                                       <span class="dashboard-data light-gray">
+                                          <ul class="da-thumbs">
+                                             <li>
+                                                <a href="/aoi">
+                                                   <div class="front-data">
+                                                      <span class="icon">
+                                                          <img src="/assets/images/dashboard-icon/aoi.png" alt=""
+                                                               title=""/>
+                                                      </span>
+                                                      <span class="title" th:if="${session.role == 'ORG ADMIN'}">Org-Level Areas Of Interest</span>
+                                                      <span class="title" th:if="${session.role == 'SUBORG ADMIN'}">Areas Of Interest</span>
+                                                   </div>
+                                                   <article class="da-animate da-slideFromRight">
+                                                      <div class="back-data">
+                                                         <span class="icon">
+                                                             <img src="/assets/images/dashboard-icon/aoi-h.png" alt=""
+                                                                  title=""/>
+                                                         </span>
+                                                         <span class="title" th:if="${session.role == 'ORG ADMIN'}">Org-Level Areas Of Interest</span>
+                                                         <span class="title" th:if="${session.role == 'SUBORG ADMIN'}">Areas Of Interest</span>
+                                                      </div>
+                                                   </article>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </span>
+                                        </div>
+                                        <div class="col-sm-2">
+                                       <span class="dashboard-data light-gray">
+                                          <ul class="da-thumbs">
+                                             <li>
+                                                <a href="/moderation">
+                                                   <div class="front-data">
+                                                      <span class="icon">
+                                                          <img src="/assets/images/dashboard-icon/moderation.png" alt=""
+                                                               title=""/> </span>
+                                                      <span class="title">Moderation</span>
+                                                   </div>
+                                                   <article class="da-animate da-slideFromRight">
+                                                      <div class="back-data">
+                                                         <span class="icon">
+                                                             <img src="/assets/images/dashboard-icon/moderation-h.png"
+                                                                  alt="" title=""/>
+                                                         </span>
+                                                         <span class="title">Moderation</span>
+                                                      </div>
+                                                   </article>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </span>
+                                        </div>
+                                        <div class="col-sm-2">
+                                       <span class="dashboard-data light-gray">
+                                          <ul class="da-thumbs">
+                                             <li>
+                                                <a href="/language">
+                                                   <div class="front-data">
+                                                      <span class="icon">
+                                                          <img src="/assets/images/dashboard-icon/language.png" alt=""
+                                                               title=""/>
+                                                      </span>
+                                                      <span class="title">languages</span>
+                                                   </div>
+                                                   <article class="da-animate da-slideFromRight">
+                                                      <div class="back-data">
+                                                         <span class="icon">
+                                                             <img src="/assets/images/dashboard-icon/language-h.png"
+                                                                  alt="" title=""/>
+                                                         </span>
+                                                         <span class="title">languages</span>
+                                                      </div>
+                                                   </article>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </span>
+                                        </div>
+                                        <div class="col-sm-2" th:if="${session.role == 'ORG ADMIN'}">
+                                       <span class="dashboard-data light-gray">
+                                          <ul class="da-thumbs">
+                                             <li>
+                                                <a href="/points">
+                                                   <div class="front-data">
+
+                                                      <span class="icon"> <img
+                                                              src="assets/images/dashboard-icon/leadrbord.png" alt=""
+                                                              title=""/> </span>
+                                                      <span class="title">  LeaderBoard-points  </span>
+                                                   </div>
+                                                   <article class="da-animate da-slideFromRight">
+                                                      <div class="back-data">
+                                                        <span class="icon"> <img
+                                                                src="assets/images/dashboard-icon/leadrbord-h.png"
+                                                                alt="" title=""/></span>
+                                                         <span class="title">   LeaderBoard-points  </span>
+                                                      </div>
+                                                   </article>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </span>
+                                        </div>
+                                        <div class="col-sm-2" th:if="${session.role == 'ORG ADMIN'}">
+                                       <span class="dashboard-data light-gray">
+                                          <ul class="da-thumbs">
+                                             <li>
+                                                <a href="/badges">
+                                                   <div class="front-data">
+
+                                                      <span class="icon"> <img
+                                                              src="/assets/images/dashboard-icon/badges.png" alt=""
+                                                              title=""/> </span>
+                                                      <span class="title"> Badges </span>
+                                                   </div>
+                                                   <article class="da-animate da-slideFromRight">
+                                                      <div class="back-data">
+                                                        <span class="icon"> <img
+                                                                src="/assets/images/dashboard-icon/badges-h.png" alt=""
+                                                                title=""/></span>
+                                                         <span class="title">  Badges  </span>
+                                                      </div>
+                                                   </article>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Main content End Here -->
+    <div layout:fragment="inner-scripts">
+        <script src="/assets/js/jquery-hover-effect.js"></script>
+        <script>
+            $(document).ready(function () {
+                //home dashboard hover box
+                jQuery(function () {
+                    jQuery('ul.da-thumbs > li').hoverdir();
+                });
+            });
+        </script>
+    </div>
+</div>
+

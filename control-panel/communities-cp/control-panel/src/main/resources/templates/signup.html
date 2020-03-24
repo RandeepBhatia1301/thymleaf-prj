@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Reliance Communities</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <link rel="stylesheet" href="/assets/css/AdminLTE.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/css/login.css">
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body>
+<div class="authentication_page signup-form">
+    <div class="page_inner">
+        <div class="login_left">
+            <div class="left_inner">
+                <div class="over_block">
+                    <div class="center-block">
+                        <img src="/assets/images/admin-logo.png" alt="logo" class="img-fluid logo">
+                        <form action="/org/signup" method="post">
+                            <div class="ln-3-content">
+                                <label style="color: red;font-size: larger;"
+                                       th:if="${meaasge}" th:text="${meaasge}"></label>
+                                <h3>Sign up </h3>
+                                <div class="signup-group-box">
+                                    <div class="signup-heading"> Client Details:</div>
+                                    <div class="sign-group">
+                                        <input type="text" name="clientName" id="clientName" class="login-input"
+                                               placeholder="Name">
+                                        <!--<span class="login-error"> This files is required  </span>-->
+                                    </div>
+                                    <div class="sign-group">
+                                        <input type="text" name="address1" id="address1" class="login-input"
+                                               placeholder="Address Line 1">
+                                    </div>
+                                    <div class="sign-group">
+                                        <input type="text" name="address2" id="address2" class="login-input"
+                                               placeholder="Address Line 2">
+                                    </div>
+                                    <div class="sign-group">
+                                        <select class="select-items" id="city" name="city">
+                                            <option value=""> Select City</option>
+                                            <option value=""> indore</option>
+                                        </select>
+                                    </div>
+                                    <div class="seprator-box">
+                                        <div class="sign-group">
+                                            <input type="text" name="state" id="state" class="login-input"
+                                                   placeholder="State/Province/Region">
+                                        </div>
+                                        <div class="sign-group last">
+                                            <input type="text" name="zip" id="zip" class="login-input"
+                                                   placeholder="Zip">
+                                        </div>
+                                    </div>
+                                    <div class="sign-group">
+                                        <select class="select-items" id="country" name="country">
+                                            <option value=""> Country</option>
+                                            <option value=""> India</option>
+                                        </select>
+                                    </div>
+                                    <div class="sign-group">
+                                        <input type="text" name="phone" id="phone" class="login-input"
+                                               placeholder="Phone Number">
+                                    </div>
+                                </div>
+                                <div class="signup-group-box">
+                                    <div class="signup-heading"> Contact Person:</div>
+                                    <div class="sign-group">
+                                        <input type="text" name="firstName" id="firstName" class="login-input"
+                                               placeholder="First Name">
+                                    </div>
+                                    <div class="sign-group">
+                                        <input type="text" name="lastName" id="lastName" class="login-input"
+                                               placeholder="Last Name">
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="sign-group">
+                                        <input type="text" name="email" id="email" class="login-input"
+                                               placeholder="Email">
+                                    </div>
+                                    <div class="sign-group">
+                                        <input type="password" name="password" id="password" class="login-input"
+                                               placeholder="Password">
+                                    </div>
+                                    <div class="sign-group">
+                                        <input type="password" name="confPassowrd" id="confPassowrd" class="login-input"
+                                               placeholder="Confirm Password">
+                                    </div>
+                                </div>
+                                <div class="botton-group">
+                                    <button name="submitBtn" type="submit" class="btn ln-3-btn"> Sign up</button>
+                                    <!--<button name="submitBtn" type="submit" class="btn ln-3-btn cancel-button"> Cancel </button>-->
+                                    <span class="sign-up-account"> if you are already a member, <a href="/login"> click here </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/adminlte.js"></script>
+</body>
+</html>

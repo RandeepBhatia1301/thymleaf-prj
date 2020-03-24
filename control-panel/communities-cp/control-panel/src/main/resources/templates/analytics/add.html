@@ -1,0 +1,36 @@
+<div layout:decorate="~{layout}">
+    <!-- Main content Start Here -->
+    <div layout:fragment="content">
+        <section class="content-header">
+            <h1>Analytics</h1>
+        </section>
+        <section class="content container-fluid table-box-control">
+            <form th:action="@{/analytics/store}" th:method="post" name="addAnalytics" id="addAnalytics">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Analytics Code</label>
+                                        <textarea name="settingValue" id="settingValue"
+                                                  th:text="${settingValue != null ? settingValue : ''}"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <button class="main-button submit m-right-10" type="submit">Save</button>
+                            <a class="cancel-button" href="javascript:void(0);"
+                               onclick="history.back();">
+                                Cancel </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+    <!-- Main content End Here -->
+</div>
+</div>

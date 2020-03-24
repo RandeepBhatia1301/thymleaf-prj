@@ -1,0 +1,24 @@
+<form th:action="@{/modules/store}" th:method="post" name="add-modules" id="add-modules">
+    <div class="popup-form">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Module name</label>
+                    <input type="text" class="form-control" name="name" id="name">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>description</label>
+                    <textarea name="description" id="description"></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="main-button" >save</button>
+                <button type="button" class="gray-button" data-dismiss="modal">cancel</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!--add-community Model  -->

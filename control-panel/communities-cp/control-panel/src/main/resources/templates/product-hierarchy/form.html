@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-lg-12">
+        <form th:action="@{${URL}}" th:method="${method}" enctype="multipart/form-data" name="productForm"
+              id="productForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label> name </label>
+                        <input type="text" class="form-control" name="name" id="name"
+                               th:value="${name != null ? name : ''}">
+                        <input type="hidden" class="form-control" name="id" id="id" th:value="${id}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <!--  <div class="form-group file-upload-box">
+                            <label for="uploadLanguage"> Upload File </label>
+                            <input id="uploadLanguage" name="uploadLanguage" placeholder="Choose File" class="upload-input">
+                            <div class="fileUpload upload-button">
+                                <span>Upload</span>
+                                <input name="uploadFile" id="uploadedFile" type="file" class="upload" value="Upload"/>
+                            </div>
+                        </div>-->
+                        <label>Description</label>
+                        <input type="text" class="form-control" name="description" id="description"
+                               th:value="${description != null ? description : ''}">
+                    </div>
+                </div>
+
+              <!--  <div class="col-md-4 select-display">
+                    <div class="form-group">
+                        <label> Level </label>
+                        &lt;!&ndash;  <input type="text" class="form-control" name="level" id="level"
+                                 th:value="${level != null ? level : ''}">&ndash;&gt;
+
+                        <select class="select-items form-control" name="level" id="level" th:value="${level}">
+                            <option value="1" th:selected="(${level} == 1)">1</option>
+                            <option value="2" th:selected="(${level} == 2)">2</option>
+                            <option value="3" th:selected="(${level} == 3)">3</option>
+                        </select>
+                    </div>
+                </div>-->
+            </div>
+            <div class="row">
+                <div class="modal-footer">
+                    <input type="submit" class="main-button" value="Save" id="submit">
+                    <button type="button" class="gray-button" data-dismiss="modal"> Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

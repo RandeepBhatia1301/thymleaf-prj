@@ -1,0 +1,141 @@
+<!-- Main content Start Here -->
+<div layout:decorate="~{layout}">
+    <div layout:fragment="content">
+        <section class="content-header">
+            <h1>AOI</h1>
+        </section>
+        <section class="content container-fluid moderation-community-wrapper">
+            <form role="form" action="/moderation/hierarchy/store" method="post" id="moderation" name="moderation">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-header">
+
+                                <div class="box-body rc-form-body">
+                                    <div class="row">
+
+                                        <!-- Moderation Start Here -->
+                                        <div class="col-sm-12 margin-b15 ac-mob">
+                                            <div class="row">
+                                                <input type="hidden" name="isAOI" id="isAOI" value="1">
+                                                <div class="form-group">
+                                                    <div class="col-sm-3 ac-mob-interest">
+                                                        <label> <strong> Set moderation for: </strong> </label>
+                                                    </div>
+                                                    <div class="col-sm-4 ac-mob-interest">
+                                                        <label class="custom-chk">
+                                                            <input type="checkbox" class="minimal communities"
+                                                                   name="allCommunities"
+                                                                   id="allCommunities" value="1">
+                                                            <span class="check-label"> all AOI </span>
+                                                        </label>
+                                                        <label class="custom-chk">
+                                                            <input type="checkbox" class="minimal communities" checked
+                                                                   id="specific"
+                                                                   name="allCommunities" value="0">
+                                                            <span class="check-label"> specific </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-4 add-remove-selected">
+                                                    <div class="form-group">
+                                                        <label> </label>
+                                                        <select class="form-control" id="categoryName"
+                                                                name="categoryName">
+                                                            <option value="">Select an AOI</option>
+                                                            <option th:each="category : *{categoryList}"
+                                                                    th:value="${category.getId()}"
+                                                                    th:text="${category.getTitle()}"
+                                                                    th:selected="(${selectedCategory}==${category.getId()})"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Moderation End Here -->
+                                        <div class="col-md-12">
+                                            <div class="divider"></div>
+                                        </div>
+                                        <div class="col-sm-12 margin-b15 ac-mob">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-sm-3 ac-mob-interest">
+                                                        <label> <strong>Approval to subscribe Areas of
+                                                            Interest:</strong></label>
+                                                    </div>
+                                                    <div class="col-sm-3 ac-mob-interest">
+                                                        <label class="custom-chk">
+                                                            <input type="checkbox" class="minimal" name="joinComm"
+                                                                   value="1" th:checked="(${joinCommunity}==1)">
+                                                            <span class="check-label"> yes </span>
+                                                        </label>
+                                                        <label class="custom-chk">
+                                                            <input type="checkbox" class="minimal" name="joinComm"
+                                                                   value="0"
+                                                                   th:checked="(${joinCommunity}==0)">
+                                                            <span class="check-label"> no </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 select-display">
+                                            <div class="form-group">
+                                                <label> Moderated by: </label>
+                                                <select class="select-items form-control" name="roleId" id="roleId">
+                                                    <option value="">Select a role</option>
+                                                    <option th:each="role : *{moderatorRoles}"
+                                                            th:value="${role.getId()}"
+                                                            th:text="${role.getName()}"
+                                                            th:selected="(${moderatedBy}==${role.getId()})"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 text-center">
+                    <button class="main-button submit m-right-10" type="submit">Submit</button>
+                    <a class="cancel-button" href="javascript:void(0);" onclick="history.back();"> Cancel </a>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+<script th:inline="javascript" layout:fragment="inner-scripts">
+
+
+    $(document).ready(function () {
+
+        $("input.communities").on("ifClicked", function () {
+            $(".communities").not(this).iCheck('uncheck');
+        });
+
+        $('input.communities').on('ifClicked ifChecked', function () {
+            var communities = $(".communities:checked").val();
+            if (communities == 1) {
+                $("#categoryName").prop("disabled", true);
+            } else {
+                $("#categoryName").prop("disabled", false);
+            }
+
+        });
+
+    });
+    $('#categoryName').change(function () {
+        var item = $(this);
+        var id = item.val();
+        var url = "/moderation/aoi/" + id;
+        $("#loader").show();
+        window.location.href = url;
+    });
+</script>
+<!-- Main content End Here -->

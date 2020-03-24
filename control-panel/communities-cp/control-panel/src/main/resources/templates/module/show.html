@@ -1,0 +1,29 @@
+<form th:action="@{/modules/store}" th:method="post" name="add-modules" id="add-modules">
+    <div class="popup-form">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Module name</label>
+                    <input type="text" class="form-control" name="name" id="name" th:value="${module.getName()}">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label> description </label>
+                    <textarea name="description" id="description" th:text="${module.getDescription()}"></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="gray-button" data-dismiss="modal">cancel</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script layout:fragment="inner-scripts">
+    $(document).ready(function () {
+        $("input,select,textarea").prop("disabled", true);
+    });
+</script>
+<!--add-community Model  -->

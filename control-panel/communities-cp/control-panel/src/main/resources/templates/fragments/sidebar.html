@@ -1,0 +1,121 @@
+<aside class="main-sidebar" th:fragment="sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu" data-widget="tree">
+            <li th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard' ? 'active':''}">
+                <a href="/dashboard">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/dashboard-h.png"/> </i>
+                    <span>Dashboard  </span>
+                </a>
+            </li>
+            <li th:if="${session.role == 'SAAS ADMIN' or session.role == 'ORG ADMIN'}" class="treeview"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/org' ||  #httpServletRequest.getRequestURI() == '/org/approval' ? 'active':''}">
+                <a href="javascript:void(0);">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/admin-h.png"/> </i>
+                    <span>Admin</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li th:if="${session.role == 'SAAS ADMIN'}"><a href="/org">Organization Management </a></li>
+                    <li><a href="/users">User Management </a></li>
+                    <li th:if="${session.role == 'SAAS ADMIN'}">
+                        <a href="/org/approval"><span>Approvals</span></a>
+                    </li>
+                    <li th:if="${session.role == 'ORG ADMIN'}"><a href="/sub-org">Sub Organization
+                        Management</a></li>
+                </ul>
+            </li>
+            <li th:classappend="${#httpServletRequest.getRequestURI() == '/product-hierarchy' ? 'active':''}">
+                <a href="/product-hierarchy">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/product-hierarchy-h.png"/> </i>
+                    <span>Product Hierarchy</span>
+                </a>
+            </li>
+            <li
+                th:classappend="${#httpServletRequest.getRequestURI() == '/content' ? 'active':''}">
+                <a href="/content">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/content-type-h.png"/></i>
+                    <span>Content Type</span></a>
+            </li>
+            <li th:if="${session.role == 'ORG ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/community' ? 'active':''}">
+                <a href="/community">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/hybrid-communities-h.png"/></i>
+                    <span>Org-Level Communities</span></a>
+            </li>
+            <li th:if="${session.role == 'SUBORG ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/community' ? 'active':''}">
+                <a href="/community">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/hybrid-communities-h.png"/> </i>
+                    <span>Communities</span></a>
+            </li>
+            <li th:if="${session.role == 'ORG ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/aoi' ? 'active':''}">
+                <a href="/aoi">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/aoi-h.png"/> </i>
+                    <span>Org-Level Areas Of Interest</span></a>
+            </li>
+            <li th:if="${session.role == 'SUBORG ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/aoi' ? 'active':''}">
+                <a href="/aoi">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/aoi-h.png"/> </i>
+                    <span>Areas Of Interest</span></a>
+            </li>
+            <li th:if="${session.role == 'SUBORG ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/moderation' ? 'active':''}"><a
+                    href="/moderation">
+                <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/moderation-h.png"/> </i>
+                <span> Moderation </span></a></li>
+            <li th:classappend="${#httpServletRequest.getRequestURI() == '/language' ? 'active':''}">
+                <a href="/language">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/language-h.png"/> </i>
+                    <span>Languages</span></a>
+            </li>
+            <li th:if="${session.role == 'SUBORG ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/tags' ? 'active':''}">
+                <a href="/tags">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/tag-h.png"/> </i>
+                    <span>Tags</span></a>
+            </li>
+            <li th:if="${session.role == 'SAAS ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/points' ? 'active':''}">
+                <a href="/points">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/leadrbord-h.png"/> </i>
+                    <span>Leader Board points</span></a>
+            </li>
+            <li th:if="${session.role == 'SAAS ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/modules' ? 'active':''}"><a
+                    href="/modules">
+                <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/moderation-h.png"/> </i>
+                <span> Modules </span></a></li>
+
+            <li th:if="${session.role == 'SAAS ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/badges' ? 'active':''}">
+                <a href="/badges">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/badges-h.png"/> </i>
+                    <span>Badges</span></a>
+            </li>
+            <li th:if="${session.role == 'ORG ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/categoryType' ? 'active':''}">
+                <a href="/categoryType">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/badges-h.png"/> </i>
+                    <span>Category type</span></a>
+            </li>
+            <li th:if="${session.role == 'ORG ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/stopWord' ? 'active':''}">
+                <a href="/stopWord">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/badges-h.png"/> </i>
+                    <span>Stop words</span></a>
+            </li>
+
+            <li th:if="${session.role == 'SUBORG ADMIN'}"
+                th:classappend="${#httpServletRequest.getRequestURI() == '/analytics' ? 'active':''}">
+                <a href="/analytics">
+                    <i class="collapse-icons"> <img src="/assets/images/dashboard-icon/badges-h.png"/> </i>
+                    <span>Analytics</span></a>
+            </li>
+        </ul>
+    </section>
+    <!-- sidebar -->
+</aside>

@@ -1,0 +1,24 @@
+<script src="/assets/js/jquery-3.3.1.js"></script>
+<script src="/assets/js/bootstrap.js"></script>
+<script src="/assets/js/jquery.validate.js"></script>
+<script src="/assets/js/additional-methods.js"></script>
+<script src="/assets/js/sweetalert2.all.min.js"></script>
+<script src="/assets/js/icheck.js"></script>
+<script src="/assets/js/jquery.nice-select.js"></script>
+<script src="/assets/js/validate.js"></script>
+<script src="/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/assets/js/jquery.json-editor.min.js"></script>
+<!--<script src="/assets/js/switcher.js"></script>-->
+<script src="/assets/js/datatables.js"></script>
+<script src="/assets/js/jquery.spring-friendly.js"></script>
+<script src="/assets/js/adminlte.js"></script>
+<script src="/assets/js/custom.js?v=1.0"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        if($("#uploadedFile").length > 0){
+            document.getElementById("uploadedFile").onchange = function () {
+                document.getElementById("upload-one").value = this.files.item(0).name;
+            };
+        }
+    });
+</script>

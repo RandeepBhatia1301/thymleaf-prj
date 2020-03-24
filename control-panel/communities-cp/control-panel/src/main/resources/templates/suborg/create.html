@@ -1,0 +1,264 @@
+<div layout:decorate="~{layout}">
+   <div layout:fragment="content">
+
+<!-- Main content Start Here -->
+   <section class="content-header">
+      <h1>Add Sub-Organization</h1>
+   </section>
+   <section class="content container-fluid form-box-control org-both-box">
+      <form role="form" action="/subOrg/store" method="post" enctype="multipart/form-data" name="createSubOrg" id="createSubOrg">
+         <!--  Org Detail -->
+         <div class="row">
+            <div class="col-md-12">
+               <div class="box">
+                  <div class="box-header">
+                     <div class="col-sm-12">
+                        <div class="heading">
+                           <h3 class="box-title"> Sub-Organization Details </h3>
+                        </div>
+                     </div>
+                     <div class="box-body rc-form-body">
+                        <div class="row">
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label> Sub-Organization Name <sup class="r-star-sign">*</sup> </label>
+                                 <input type="text" class="form-control" name="name" id="name">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label> Sub-Organization Abbrevation <sup class="r-star-sign">*</sup> </label>
+                                 <input type="text" class="form-control" name="abbreviations" id="abbreviations">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label> Address Line 1 </label>
+                                 <input type="text" class="form-control" name="address_line1" id="address_line1">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label> Address Line 2 </label>
+                                 <input type="text" class="form-control" name="address_line2" id="address_line2">
+                              </div>
+                           </div>
+                           <div class="col-sm-4 select-display">
+                              <div class="form-group">
+                                 <label>city</label>
+                                 <input type="text" name="city" id="city" class="form-control">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label> State/Province/Region </label>
+                                 <input type="text" class="form-control" name="state" id="state">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label> Zip </label>
+                                 <input type="text" class="form-control" name="zip" id="zip">
+                              </div>
+                           </div>
+                           <div class="col-sm-4 select-display">
+                              <div class="form-group">
+                                 <label>Country</label>
+                                 <select class="select-items form-control" name="country" id="country">
+                                    <option th:value="${country.id}" th:each="country : ${countries}"
+                                            th:text="${country.country_name}"></option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label> Phone Number </label>
+                                 <input type="text" class="form-control" name="phone_number" id="phone_number">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group file-upload-box">
+                                 <label for="subOrgImg"> Upload Image </label>
+                                 <input type="text" id="subOrgImgName" name="subOrgImgName" placeholder="Choose File" class="upload-input">
+                                 <div class="fileUpload upload-button">
+                                    <span>Upload</span>
+                                    <input name="subOrgImg" id="subOrgImg" type="file" class="upload" value="Upload"/>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-4 preview-image">
+                              <img id="preview-image"src="http://placehold.it/80x80">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!--  Org Detail -->
+         <!--  Admin Detail -->
+         <div class="row">
+            <div class="col-md-12">
+               <div class="box">
+                  <div class="box-header">
+                     <div class="col-sm-12">
+                        <div class="heading">
+                           <h3 class="box-title">App-Configurations</h3>
+                        </div>
+                     </div>
+                     <div class="box-body rc-form-body">
+                        <div class="row">
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label>App name <sup class="r-star-sign">*</sup> </label>
+                                 <input type="text" class="form-control" name="appName" id="appName">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label >APP URL <sup class="r-star-sign">*</sup> </label>
+                                 <input type="text" class="form-control" name="appUrl" id="appUrl">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label>API URL<sup class="r-star-sign">*</sup> </label>
+                                 <input type="text" class="form-control" name="apiUrl" id="apiUrl">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!--  Admin Detail -->
+         <!--  Admin Detail -->
+         <div class="row">
+            <div class="col-md-12">
+               <div class="box">
+                  <div class="box-header">
+                     <div class="col-sm-12">
+                        <div class="heading">
+                           <h3 class="box-title"> Sub-Organization Admin Details </h3>
+                        </div>
+                     </div>
+                     <div class="box-body rc-form-body">
+                        <div class="row">
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label>first name <sup class="r-star-sign">*</sup> </label>
+                                 <input type="text" class="form-control" name="first_name" id="first_name">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label>last name <sup class="r-star-sign">*</sup> </label>
+                                 <input type="text" class="form-control" name="last_name" id="last_name">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label> email <sup class="r-star-sign">*</sup> </label>
+                                 <input type="text" class="form-control" name="email" id="email">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label >Password <sup class="r-star-sign">*</sup> </label>
+                                 <input type="password" class="form-control" name="password" id="password">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label > Confirm Password <sup class="r-star-sign">*</sup> </label>
+                                 <input type="password" class="form-control" name="confirm_password" id="confirm_password">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!--  Admin Detail -->
+         <!--  Product Permission -->
+         <div class="row" th:if="${org.getIsSsoEnabled() == 0}">
+            <div class="col-md-12">
+               <div class="box">
+                  <div class="box-header">
+                     <div class="col-sm-12">
+                        <div class="heading">
+                           <h3 class="box-title"> SSO Settings </h3>
+                        </div>
+                     </div>
+                     <div class="box-body rc-form-body">
+                        <div class="row">
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label>SSO URL <sup class="r-star-sign">*</sup> </label>
+                                 <input type="text" class="form-control" name="sso_url" id="sso_url">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label>SSO Key <sup class="r-star-sign">*</sup> </label>
+                                 <input type="text" class="form-control" name="sso_key" id="sso_key">
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                 <label>SSO Type <sup class="r-star-sign">*</sup> </label>
+                                 <input type="text" class="form-control" name="sso_type" id="sso_type">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!--  Product Permission -->
+         <!--  Default Communities  -->
+      <!--   <div class="row">
+            <div class="col-md-12">
+               <div class="box">
+                  <div class="box-header">
+                     <div class="col-sm-12">
+                        <div class="heading">
+                           <h3 class="box-title">Default Communities </h3>
+                        </div>
+                     </div>
+                     <div class="box-body rc-form-body">
+                        <div class="row">
+                           <div class="co-sm-12">
+                              <div class="col-sm-4">
+                                 <label for="question">Can users disjoin default Communities ? </label>
+                              </div>
+                              <div class="col-sm-1">
+                                 <div class="form-group">
+                                    <label><input type="radio" value="1" name="is_default_communities" id="yes"> Yes</label>
+                                 </div>
+                              </div>
+                              <div class="col-sm-1">
+                                 <div class="form-group">
+                                    <label> <input type="radio" value="0" name="is_default_communities" id="no"> No</label>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>-->
+         <!--  Default Communities -->
+         <div class="col-sm-12 text-center">
+            <button class="main-button submit m-right-10" type="submit">Submit</button>
+            <a class="cancel-button" href="javascript:void();" onclick="history.back();"> Cancel </a>
+         </div>
+      </form>
+   </section>
+   </div>
+<!-- Main content End Here -->
+   </div>

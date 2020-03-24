@@ -1,0 +1,194 @@
+<div layout:decorate="~{layout}">
+    <!-- Main content Start Here -->
+    <div layout:fragment="content">
+        <section class="content-header">
+            <h1>Badges</h1>
+        </section>
+        <section class="content container-fluid table-box-control">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <!--<div class="search-tool">
+                                <form id="searchForm" name="searchForm">
+                                    <div class="input-group">
+                                        <input type="text" name="searchQuery" id="searchQuery" class="form-control"
+                                               placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>-->
+                            <a href="javascript:void(0);" class="main-button add-right" th:onclick="|add('Badge');|">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Badge
+                            </a>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-theme" id="orgTable">
+                                <thead>
+                                <tr>
+                                    <th>s.no</th>
+                                    <th>Badge Name</th>
+                                    <th>Discription</th>
+                                    <th>Level</th>
+                                    <th class="align-right">actions</th>
+                                </tr>
+                                </thead>
+                                <tbody th:insert="badge/table"></tbody>
+                            </table>
+                            <!-------------------------------------->
+                            <div class="pagination-data-box">
+
+                                <div class="pagination-div">
+        <span th:if="${page.hasPrevious()}">
+        <a th:href="@{/badges(page=${page.number-1},size=${page.size})}">Previous</a>
+    </span>
+                                    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                                        <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+                                        <span th:unless="${page.number == i}">
+             <a th:href="@{/badges(page=${i},size=${page.size})}">[[${i}+1]]</a>
+        </span>
+                                    </th:block>
+                                    <span th:if="${page.hasNext()}">
+        <a th:href="@{/badges(page=${page.number+1},size=${page.size})}">Next</a>
+    </span>
+                                </div>
+                            </div>
+                            <!-------------------------------------->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+    <!-- Main content End Here -->
+</div>
+
+<!--model popup-->
+
+<div layout:fragment="modal-popup">
+    <div id="add-badge" class="modal fade popup-theme badges-popup" role="dialog">
+        <div class="big-model">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="modal-title"> Add Content Type </h4>
+                </div>
+                <div class="modal-body panel-body" id="modal-body"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--model popup-->
+<script th:inline="javascript" layout:fragment="inner-scripts">
+
+    function add(name) {
+        $.ajax({
+            url: "/badges/create",
+            type: "get",
+            success: function (response) {
+                $("#modal-title").html("Add " + name);
+                $("#modal-body").html(response);
+                $("#add-badge").modal("show");
+            }
+        });
+    }
+
+    function show(url, name, id) {
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (response) {
+                $("#modal-title").html("Show " + name);
+                $("#modal-body").html(response);
+                $("#add-badge").modal("show");
+            }
+        });
+    }
+
+    function edit(url, name, id) {
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (response) {
+                $("#modal-title").html("Edit " + name);
+                $("#modal-body").html(response);
+                $("#add-badge").modal("show");
+            }
+        });
+    }
+
+    $('.status').click(function () {
+        var radioValue = $(this).val();
+        var userId = ($(this).attr("data-id"));
+        $.ajax({
+            url: "/org/setActivation/" + userId + "/" + radioValue,
+            type: "get",
+            beforeSend: function (o, o1) {
+                $("#loader").show();
+            },
+            success: function (response) {
+                window.location.reload();
+            }
+        })
+    });
+    String.prototype.format = function () {
+        var a = this;
+        for (k in arguments) {
+            a = a.replace("{" + k + "}", arguments[k]);
+        }
+        return a;
+    };
+
+
+    $(document).ready(function () {
+        $("#add-badge").on("show.bs.modal", function () {
+
+            $("#modal-body").find("#addMore").on("click", function () {
+                addMore(this);
+            });
+
+            $("input[type='file']").on("change", function (e) {
+                $("#badgeImgName").attr("placeholder", e.target.files[0].name);
+                $("#badgeImgName").val(e.target.files[0].name);
+                readURL(this);
+            });
+            /*select placeholder in textarea*/
+            $('input[type=text], textarea').on("change", function () {
+                var regex = /\<.*?\>/;
+                var text = $(this).val().match(regex);
+            });
+        });
+    });
+
+    function addMore(ref) {
+
+        var count = $(ref).data("count");
+        var target = $(ref).data("target");
+
+        var itemId = '#level-container_' + count;
+
+        var html = '<div class="level-container" id="level-container_' + count + '"><div class="quantity"> {0} </div> {1} </div> </div>';
+        var input = '<input name="level_value[]" type="number" class="quantity-input" >';
+        var remove = '<a href="javascript:void(0)" onclick=" remove(\'' + itemId + '\');" class="remove_field"><i class="fa fa-times" aria-hidden="true"></i></a>';
+
+        var html = html.format(input, remove);
+
+        $(target).append(html);
+    }
+
+    function remove(Id) {
+        var el = $(Id);
+        el.remove();
+        alert("Element Removed");
+        console.log(el);
+    }
+
+</script>
+</div>

@@ -1,0 +1,108 @@
+<!-- Main content Start Here -->
+<div layout:decorate="~{layout}">
+    <div layout:fragment="content">
+
+        <section class="content-header">
+            <!-- <h1> Product Hierarchy</h1>-->
+        </section>
+        <section class="content container-fluid">
+            <!--  Category  Levels  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="col-sm-12">
+                                <div class="heading">
+                                    <h3 class="box-title">Category Types</h3>
+                                    <a href="javascript:void(0)" class="main-button add-right"
+                                       th:onclick="|add('Category');|"> <i class="fa fa-plus-circle"
+                                                                           aria-hidden="true"></i>
+                                        Add New Category </a>
+                                </div>
+                            </div>
+                            <form role="form" action="">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table class="table table-theme">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>Order</th>
+                                                        <th>Name</th>
+                                                        <th class="align-right">
+                                                            Action
+                                                        </th>
+                                                    </tr>
+                                                    <tr th:each="category: *{categoryList}">
+                                                        <td th:text="${category.getOrderBy()}"></td>
+                                                        <td th:text="${category.getTitle()}"></td>
+                                                        <td class="align-right">
+                                                            <a href="#"
+                                                               class="edit-icon m-right-10"
+                                                               th:onclick="|edit('/categoryType/edit/${category.getId()}','Category',${category.getId()})|">
+                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                            </a>
+
+
+                                                        </td>
+                                                    </tr>
+                                                    <!------------------------------------------------------------------------------>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  Category  Levels  -->
+        </section>
+    </div>
+    <div layout:fragment="modal-popup">
+        <div id="add-category" class="modal fade popup-theme add-language-pp" role="dialog">
+            <div class="modal-dialog edit-blog-popup">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="modal-title"> Add Language </h4>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script layout:fragment="inner-scripts">
+
+        function edit(url, name, id) {
+            $.ajax({
+                url: url,
+                type: "get",
+                success: function (response) {
+                    $("#modal-title").html("Edit " + name);
+                    $("#modal-body").html(response);
+                    $("#add-category").modal("show");
+                }
+            });
+        }
+
+        function add(name) {
+            $.ajax({
+                url: "/categoryType/create",
+                type: "get",
+                success: function (response) {
+                    $("#modal-title").html("Add " + name);
+                    $("#modal-body").html(response);
+                    $("#add-category").modal("show");
+                }
+            });
+        }
+
+    </script>
+</div>
+<!-- Main content End Here -->

@@ -1,0 +1,203 @@
+<!-- Main content Start Here -->
+<div layout:decorate="~{layout}">
+    <div layout:fragment="content">
+
+        <section class="content-header">
+            <h1> User List </h1>
+        </section>
+        <section class="content container-fluid table-box-control">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="search-tool">
+                                <div class="input-group">
+                                    <input type="text" name="" class="form-control" placeholder="Search">
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="javascript:void(0);" class="main-button add-right"
+                               th:onclick="|add('User');|"> <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                Add User
+                            </a>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="col-sm-12">
+                            <div class="box-body table-responsive no-padding">
+                                <table class="table table-theme one-line-row">
+                                    <tbody>
+                                    <tr>
+                                        <th>s.no</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th th:if="${session.role == 'SAAS ADMIN'}">Organization Name</th>
+                                        <th th:if="${session.role == 'ORG ADMIN'}">Sub-Organization Name</th>
+                                        <th>Created on</th>
+                                        <th>Status</th>
+                                        <th>actions</th>
+                                    </tr>
+                                    <tr th:each="user,iter : *{users}">
+                                        <td th:text="${iter.index +1 }"></td>
+                                        <td th:text="${user.getFirstName() + '' + user.getLastName()}"></td>
+                                        <td th:text="${user.getEmail()}"></td>
+                                        <td th:text="${user.getOrg().getName()}"> Ril</td>
+                                        <td th:text="${user.getCreatedAt()}"> 20/11/2018</td>
+                                        <td>
+                                            <div class="toggle-switch">
+                                                <div class="switch-main">
+                                                    <div class="switch">
+                                                        <input type="radio" th:name="${user.getId()}" value="1"
+                                                               th:checked="(${user.getStatus()}==1)" class="status"
+                                                               th:data-id="${user.getId()}">
+                                                        <span>Active</span>
+                                                    </div>
+                                                    <div class="switch">
+                                                        <input type="radio" th:name="${user.getId()} + _status"
+                                                               value="0" th:checked="(${user.getStatus()}==0)"
+                                                               class="status" th:data-id="${user.getId()}">
+                                                        <span>Inactive</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="button-align">
+                                            <a href="#" class="view-icon m-right-10"
+                                               th:onclick="|show('/user/show/${user.getId()}','User',${user.getId()})|"><i
+                                                    class="fa fa-eye"
+                                                    aria-hidden="true"></i></a>
+
+                                            <a href="#" class="edit-icon m-right-10"
+                                               th:onclick="|edit('/user/edit/${user.getId()}','User',${user.getId()})|"><i
+                                                    class="fa fa-pencil-square-o"
+                                                    aria-hidden="true"></i></a>
+                                            <!-- <a href="#" class="delete-icon m-right-10"
+                                                th:onclick="|del('/user/delete/' + ${user.getId()})|"><i
+                                                     class="fa fa-trash-o"
+                                                     aria-hidden="true"></i></a>-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <!-------------------------------------->
+                        <div class="pagination-data-box">
+                            <div class="pagination-div">
+        <span th:if="${page.hasPrevious()}">
+        <a th:href="@{/users(page=${page.number-1},size=${page.size})}">Previous</a>
+    </span>
+                                <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                                    <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+                                    <span th:unless="${page.number == i}">
+             <a th:href="@{/users(page=${i},size=${page.size})}">[[${i}+1]]</a>
+        </span>
+                                </th:block>
+                                <span th:if="${page.hasNext()}">
+        <a th:href="@{/users(page=${page.number+1},size=${page.size})}">Next</a>
+    </span>
+                            </div>
+                        </div>
+                        <!-------------------------------------->
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+    </div>
+    <!-- Main content End Here -->
+    <!--show add user popup-->
+    <div layout:fragment="modal-popup">
+        <div id="add-User" class="modal fade popup-theme" role="dialog">
+            <div class="big-model edit-blog-popup">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="modal-title"> Add Content Type </h4>
+                    </div>
+                    <div class="modal-body" id="modal-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script layout:fragment="inner-scripts">
+
+        function edit(url, name, id) {
+            $.ajax({
+                url: url,
+                type: "get",
+                success: function (response) {
+                    $("#modal-title").html("Edit " + name);
+                    $("#modal-body").html(response);
+                    $("#add-User").modal("show");
+                }
+            });
+        }
+
+        function add(name) {
+            $.ajax({
+                url: "/user/create",
+                type: "get",
+                success: function (response) {
+                    $("#modal-title").html("Add " + name);
+                    $("#modal-body").html(response);
+                    $("#add-User").modal("show");
+                }
+            });
+        }
+
+        function show(url, name, id) {
+            $.ajax({
+                url: url,
+                type: "get",
+                success: function (response) {
+                    $("#modal-title").html("Show " + name);
+                    $("#modal-body").html(response);
+                    $("#add-User").modal("show");
+                }
+            });
+        }
+
+        function del(url) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this User!",
+                type: "warning",
+                confirmButtonText: 'Go Ahead',
+                cancelButtonText: 'Cancel',
+                confirmButtonClass: 'confirm-btn',
+                cancelButtonClass: 'cancel-btn',
+                showCancelButton: true
+            }).then(function (result) {
+                if (result.value) {
+                    window.location.href = url;
+                }
+            })
+        }
+
+
+        $('.status').click(function () {
+            var radioValue = $(this).val();
+            var userId = ($(this).attr("data-id"));
+            $.ajax({
+                url: "/user/setActivation/" + userId + "/" + radioValue,
+                type: "get",
+                beforeSend: function (o, o1) {
+                    $("#loader").show();
+                },
+                success: function (response) {
+                    window.location.reload();
+
+                }
+            })
+
+        });
+
+    </script>
+</div>
+<!--modal popup ends-->

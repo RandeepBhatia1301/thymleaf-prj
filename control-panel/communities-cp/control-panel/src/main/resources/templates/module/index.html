@@ -1,0 +1,142 @@
+<div layout:decorate="~{layout}">
+    <!-- Main content Start Here -->
+    <div layout:fragment="content">
+        <section class="content-header">
+            <h1> Module List </h1>
+        </section>
+        <section class="content container-fluid table-box-control">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                           <!-- <div class="search-tool">
+                                <form id="searchForm" name="searchForm">
+                                    <div class="input-group">
+                                        <input type="text" name="searchQuery" id="searchQuery" class="form-control"
+                                               placeholder="Search">
+                                        &lt;!&ndash;  <div class="input-group-btn">
+                                              <button type="submit" class="btn btn-default">
+                                                  <i class="fa fa-search"></i>
+                                              </button>
+                                          </div>&ndash;&gt;
+                                    </div>
+                                </form>
+                            </div>-->
+                            <a href="javascript:void(0);" class="main-button add-right" th:onclick="|add('Module');|">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Module
+                            </a>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-theme" id="moduleTable">
+                                <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>Module Name</th>
+                                    <th>Description Name</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody th:insert="module/tableStubs"></tbody>
+                            </table>
+                            <!-------------------------------------->
+                            <div class="pagination-data-box">
+                                <div class="pagination-div">
+        <span th:if="${page.hasPrevious()}">
+        <a th:href="@{/modules(page=${page.number-1},size=${page.size})}">Previous</a>
+    </span>
+                                    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                                        <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+                                        <span th:unless="${page.number == i}">
+             <a th:href="@{/modules(page=${i},size=${page.size})}">[[${i}+1]]</a>
+        </span>
+                                    </th:block>
+                                    <span th:if="${page.hasNext()}">
+        <a th:href="@{/modules(page=${page.number+1},size=${page.size})}">Next</a>
+    </span>
+                                </div>
+                            </div>
+                            <!-------------------------------------->
+                        </div>
+                    </div>
+                </div>
+                <!--  <div class="pagination-data-box">
+                      <span th:remove="tag" th:utext="${paginationLinks}"/>
+                  </div>-->
+
+            </div>
+
+        </section>
+    </div>
+    <!--model popup-->
+
+    <div layout:fragment="modal-popup">
+        <div id="add-module" class="modal fade popup-theme" role="dialog">
+            <div th:classappend="${session.role == 'SAAS ADMIN' ? 'modal-dialog edit-blog-popup':'big-model edit-blog-popup'}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="modal-title"> Add Content Type </h4>
+                    </div>
+                    <div class="modal-body panel-body" id="modal-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--model popup-->
+    <script th:inline="javascript" layout:fragment="inner-scripts">
+        function add(name) {
+            $.ajax({
+                url: "/modules/create",
+                type: "get",
+                success: function (response) {
+                    $("#modal-title").html("Add " + name);
+                    $("#modal-body").html(response);
+                    $("#add-module").modal("show");
+                }
+            });
+        }
+
+        function show(url, name, id) {
+            $.ajax({
+                url: url,
+                type: "get",
+                success: function (response) {
+                    $("#modal-title").html("Show " + name);
+                    $("#modal-body").html(response);
+                    $("#add-module").modal("show");
+                }
+            });
+        }
+
+        function edit(url, name, id) {
+            $.ajax({
+                url: url,
+                type: "get",
+                success: function (response) {
+                    $("#modal-title").html("Edit " + name);
+                    $("#modal-body").html(response);
+                    $("#add-module").modal("show");
+                }
+            });
+        }
+
+        $('.status').click(function () {
+            var radioValue = $(this).val();
+            var moduleId = ($(this).attr("data-id"));
+            $.ajax({
+                url: "/module/setActivation/" + moduleId + "/" + radioValue,
+                type: "get",
+                beforeSend: function (o, o1) {
+                    $("#loader").show();
+                },
+                success: function (response) {
+                    window.location.reload();
+
+                }
+            })
+
+        });
+    </script>
+</div>

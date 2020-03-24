@@ -1,0 +1,14 @@
+<tr th:each="badge,iter : *{badges}">
+    <td th:text="${iter.index +1 }"></td>
+    <td th:text="${badge.getTitle()}"></td>
+    <td th:text="${badge.getDescription() }">Name</td>
+    <td th:text="${badge.getL()?.name + ' :- ' + badge.getL()?.counter }">admin@reliancecommunities.com</td>
+    <td class="align-right">
+       <!-- <a th:onclick="|show('/badges/show/${badge.getId()}','Badge',${badge.getId()})|" class="view-icon m-right-10">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+        </a>-->
+        <a th:onclick="|edit('${ '/badges/' + badge.getId() + '/edit' }','Badge',${badge.getId()})|" class="edit-icon m-right-10">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </a>
+    </td>
+</tr>

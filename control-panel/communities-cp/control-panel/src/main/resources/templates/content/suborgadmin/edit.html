@@ -1,0 +1,109 @@
+<div layout:decorate="~{layout}">
+    <div layout:fragment="content">
+        <section class="content-header">
+            <h1>Edit Content</h1>
+        </section>
+        <section class="content container-fluid edit-list-box">
+
+            <form role="form" action="/content/update" th:method="put" id="orgContentEdit" name="orgContentEdit">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="popup-form-title">General Settings</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 select-display">
+                            <div class="form-group">
+                                <label> Select Default language </label>
+                                <select class="select-items form-control" name="languageList" id="languageList"
+                                        th:value="${languageList}">
+                                    <option value="">Select a language</option>
+                                    <option th:each="languageList : *{languageList}" th:value="${languageList.getId()}"
+                                            th:text="${languageList.getName()}"
+                                            th:selected="(${orgContent.getDefaultLanguageId()} == ${languageList.getId()})">
+
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" class="form-control" name="id" id="id" th:value="${id}">
+                        <div class="col-sm-6 margin-b15 blog-label-mob">
+                            <label class="col-sm-6 col-form-label text-left">Post Archival View</label>
+                            <div class="col-sm-6">
+                                <div class="custom-radio">
+                                    <label>
+                                        <input name="archivalView" checked type="radio"
+                                               value="1"
+                                               class="minimal" id="visible"
+                                               th:checked="(${orgContent.getPostArchivalView()} == 1)">
+                                        visible (Read Only)
+                                    </label>
+                                </div>
+                                <div class="custom-radio">
+                                    <label>
+                                        <input name="archivalView" type="radio" value="0"
+                                               class="minimal" id="invisible"
+                                               th:checked="(${orgContent.getPostArchivalView()} == 0)">invisible
+                                    </label>
+                                </div>
+                            </div>
+                            <!------------->
+                        </div>
+                    </div>
+                    <div class="col-sm-6 margin-b15 blog-label-mob">
+                        <div class="form-group">
+                            <label>Archive period</label>
+                            <select class="select-items form-control" name="archivalPeriod" id="archivalPeriod">
+                                <option value="">Select</option>
+                                <option value="1" th:selected="(${orgContent.getArchivalPeriod()} == 1)">1 Year</option>
+                                <option value="2" th:selected="(${orgContent.getArchivalPeriod()} == 2)">2 Year</option>
+                                <option value="3" th:selected="(${orgContent.getArchivalPeriod()} == 3)">3 Year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 translate-center">
+                        <button type="button" id="translate" class="main-button translate-button">
+                            Validate
+                        </button>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="edit-textarea-box">
+                                <textarea id="jsonInput" autocomplete="off" name="jsonInput"
+                                          th:text="${orgContent.getContentSettings()}"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="edit-scroll-box">
+                                <pre id="json-display"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="main-button" data-dismiss="modal">save</button>
+                    <a class="cancel-button" href="javascript:void(0);" onclick="history.back();">Cancel</a>
+                </div>
+
+            </form>
+        </section>
+    </div>
+    <script layout:fragment="inner-scripts">
+        // get JSON
+        function getJson() {
+            try {
+                return JSON.parse($('#jsonInput').val());
+            } catch (ex) {
+                alert('Wrong JSON Format: ' + ex);
+            }
+        }
+
+        // initialize
+        var editor = new JsonEditor('#json-display', getJson());
+
+        // enable translate button
+        $('#translate').on('click', function () {
+            editor.load(getJson());
+        });
+
+    </script>
+</div>

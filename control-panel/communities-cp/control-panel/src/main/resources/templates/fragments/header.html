@@ -1,0 +1,123 @@
+<header class="main-header" th:fragment="header">
+    <!-- Logo -->
+    <a href="/login" class="logo">
+        <span class="logo-mini"><img src="/assets/images/reliance-icon.png"></span>
+        <span class="logo-lg"><img src="/assets/images/reliance-icon.png"><b>
+            <span th:if="${session.role == 'ORG ADMIN'}" class="top-ril-name" th:text="${session.orgName}">Org</span>
+            <span th:if="${session.role == 'SUBORG ADMIN'}" class="top-ril-name" th:text="${session.subOrgName}">Sub Org</span>
+</b></span>
+    </a>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <!-- Reliance HC Start -->
+                <!--<li class="dropdown messages-menu"
+                    th:if="${session.role == 'SAAS ADMIN' or session.role == 'CLIENT ADMIN'}">
+                    <div class="ril-org-mob">
+                        <a href="" class="ril-icon"> <img src="/assets/images/mob-org-icon.png"/> </a>
+                    </div>
+                    <a href="#" class="dropdown-toggle rilhc" data-toggle="dropdown">
+                        <div class="ril-top-box">
+                            <div class="ril-title">Reliance</div>
+                            <div class="ril-title-2">RIL HC</div>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <div class="box-body table.html-responsive no-padding">
+                            <table.html class="table.html ril-table.html">
+                                <tbody>
+                                <tr>
+                                    <th class="ril-org switch-client" data-org="387">Client</th>
+                                    <th class="ril-org">Organization</th>
+                                </tr>
+                                <tr>
+                                    <td class="ril-org switch-client" data-org="408">Webdunia</td>
+                                    <td class="ril-org">Organization 1</td>
+                                </tr>
+                                <tr>
+                                    <td class="ril-org active switch-client" data-org="390">Admim</td>
+                                    <td class="ril-org active">Organization 2</td>
+                                </tr>
+                                <tr>
+                                    <td class="ril-org last">Diaspark</td>
+                                    <td class="ril-org last">Organization 3</td>
+                                </tr>
+                                </tbody>
+                            </table.html>
+                        </div>
+                    </ul>
+                </li>-->
+
+                <!-- <li class="dropdown notifications-menu">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                         <i class="fa fa-bell-o"></i>
+                         <span class="label label-warning">10</span>
+                     </a>
+                     <ul class="dropdown-menu">
+                         <li class="header">You have 10 notifications</li>
+                         <li>
+                             &lt;!&ndash; inner menu: contains the actual data &ndash;&gt;
+                             <ul class="menu">
+                                 <li>
+                                     <a href="#">
+                                         5 new members joined today
+                                     </a>
+                                 </li>
+                                 <li>
+                                     <a href="#">
+                                         Very long description here that may not fit into the
+                                         page and may cause design problems
+                                     </a>
+                                 </li>
+                                 <li>
+                                     <a href="#">
+                                         5 new members joined
+                                     </a>
+                                 </li>
+                                 <li>
+                                     <a href="#">
+                                         25 sales made
+                                     </a>
+                                 </li>
+                                 <li>
+                                     <a href="#">
+                                         You changed your username
+                                     </a>
+                                 </li>
+                             </ul>
+                         </li>
+                         <li class="footer"><a href="#">View all</a></li>
+                     </ul>
+                 </li>-->
+
+                <!-- Reliance HC End -->
+                <!--orgName-->
+
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-user top-user"></i>
+                        <span class="hidden-xs" th:text="${session.firstname} + ' ' + ${session.lastname}">Admin </span>
+                    </a>
+                    <ul class="dropdown-menu profile-menu">
+                        <li class="user-body">
+                            <div class="row">
+                                <div class="col-xs-12 text-left"><a href="/profile">Profile </a></div>
+                                <div class="col-xs-12 text-left"><a href="/change/passwd">Change Password </a>
+                                </div>
+                                <div class="col-xs-12 text-left">
+                                    <a href="/logout"> Logout </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
